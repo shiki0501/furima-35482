@@ -12,52 +12,50 @@
 | birthday            | date   | null: false               |
 
 ### Association
-- has_many :item
-- has_many :buy
+- has_many :items
+- has_many :buys
 
 ## itemsテーブル
-| column              | type       | options     |
-| ------------------- | ---------- | ----------- |
-| image               |            |             |
-| product_name        | text       | null: false |
-| product_description | text       | null: false |
-| category            | string     | null: false |
-| status              | string     | null: false |
-| delivery_charge     | string     | null: false |
-| shipping_area       | string     | null: false |
-| shipping_days       | string     | null: false |
-| product_price       | integer    | null: false |
-| user_id             | references |             |
+| column             | type       | options           |
+| ------------------ | ---------- | ----------------- |
+| name               | string     | null: false       |
+| description        | text       | null: false       |
+| category_id        | integer    | null: false       |
+| status_id          | integer    | null: false       |
+| delivery_charge_id | integer    | null: false       |
+| shipping_area_id   | integer    | null: false       |
+| shipping_day_id    | integer    | null: false       |
+| price              | integer    | null: false       |
+| user               | references | foreign_key: true |
 
 
 ### Association
-- has_one :buy
+- has_many :buys
 - has_one :delivery
-- belongs_to :users
+- belongs_to :user
 
 ## buysテーブル
-| column                | type       | option      |
-| --------------------- | ---------- | ----------- |
-| user_id               | references |             |
-| item_id               | references |             |
-| delivery_id           | references |             |
+| column             | type       | option            |
+| ------------------ | ---------- | ----------------- |
+| user               | references | foreign_key: true |
+| item               | references | foreign_key: true |
 
 ### Association
-- belongs_to :users
-- belongs_to :items
-- belongs_to :deliverys
+- belongs_to :user
+- belongs_to :item
+- has_one :delivery
 
 ## deliverysテーブル
-| column        | type       | option      |
-| ------------- | ---------- | ----------- |
-| postal_code   | integer    | null: false |
-| prefectures   | string     | null: false |
-| municipality  | string     | null: false |
-| address       | string     | null: false |
-| building_name | string     | null: false |
-| tell          | integer    | null: false |
-| user          | references |             |
+| column        | type       | option            |
+| ------------- | ---------- | ----------------- |
+| postal_code   | string     | null: false       |
+| shipping_area | string     | null: false       |
+| municipality  | string     | null: false       |
+| address       | string     | null: false       |
+| building_name | string     |                   |
+| tell          | string     | null: false       |
+| buy           | references | foreign_key: true |
 
 ### Association
-- has_one :item
-- has_one :buy
+- belongs_to :item
+- belongs_to :buy
