@@ -30,8 +30,7 @@
 
 
 ### Association
-- has_many :buys
-- has_one :delivery
+- has_one :buy
 - belongs_to :user
 
 ## buysテーブル
@@ -46,16 +45,15 @@
 - has_one :delivery
 
 ## deliverysテーブル
-| column        | type       | option            |
-| ------------- | ---------- | ----------------- |
-| postal_code   | string     | null: false       |
-| shipping_area | string     | null: false       |
-| municipality  | string     | null: false       |
-| address       | string     | null: false       |
-| building_name | string     |                   |
-| tell          | string     | null: false       |
-| buy           | references | foreign_key: true |
+| column           | type       | option            |
+| ---------------- | ---------- | ----------------- |
+| postal_code      | string     | null: false       |
+| shipping_area_id | integer    | null: false       |
+| municipality     | string     | null: false       |
+| address          | string     | null: false       |
+| building_name    | string     |                   |
+| tell             | string     | null: false       |
+| buy              | references | foreign_key: true |
 
 ### Association
-- belongs_to :item
 - belongs_to :buy
