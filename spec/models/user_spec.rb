@@ -8,8 +8,6 @@ RSpec.describe User, type: :model do
   describe 'ユーザー新規登録' do
     context '新規登録できる時' do
       it 'nickname,email,password,password_confirmation,first_name_kanji,last_name_kanji,first_name_kana,last_name_kana,birthday が必須であること' do
-        @user.password = '12345q'
-        @user.password_confirmation = '12345q'
         expect(@user).to be_valid
       end
     end
@@ -58,7 +56,7 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is invalid')
       end
-      it 'passwordは半角入力のみでは登録できない' do
+      it 'passwordは半角英字入力のみでは登録できない' do
         @user.password = 'qwerty'
         @user.password_confirmation = 'qwerty'
         @user.valid?
