@@ -5,7 +5,11 @@ class ItemsController < ApplicationController
   end
 
   def new
-    # if 
+    # binding.pry
+    unless 
+      user_signed_in? == true
+      redirect_to  user_session_path
+    end
     # @article = Article.new
   end
 
@@ -19,6 +23,10 @@ class ItemsController < ApplicationController
   end
 
   # private
+
+  # def user_params
+  #   params.require(:user)
+  # end
 
   # def article_params
   #   params.require(:article).permit(:title,:text,:category_id)
