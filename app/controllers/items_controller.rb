@@ -5,22 +5,23 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @article = Article.new
+    # if 
+    # @article = Article.new
   end
 
   def create
-    @article = Article.new(article_params)
-    if @article.save
-      redirect_to root_path
-    else
-      render :new
-    end
+    # @article = Article.new(article_params)
+    # if @article.save
+    #   redirect_to root_path
+    # else
+    #   render :new
+    # end
   end
 
-  private
+  # private
 
-  def article_params
-    params.require(:article).permit(:title,:text,:category_id)
-  end
+  # def article_params
+  #   params.require(:article).permit(:title,:text,:category_id)
+  # end
 
 end
