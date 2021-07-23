@@ -1,35 +1,39 @@
 class ItemsController < ApplicationController
 
   def index
-    @articles = Article.order("created_at DESC")
+    @item = Item.order("created_at DESC")
   end
 
   def new
-    # binding.pry
+    @item = Item.new
     unless 
       user_signed_in? == true
       redirect_to  user_session_path
     end
-    # @article = Article.new
   end
-
+  
   def create
-    # @article = Article.new(article_params)
-    # if @article.save
-    #   redirect_to root_path
-    # else
-    #   render :new
-    # end
+    @item = Item.new(item_params)
+    binding.pry
+    if @item.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
-  # private
+  private
 
-  # def user_params
-  #   params.require(:user)
-  # end
+  def user_params
+    params.require(:user)
+  end
 
-  # def article_params
-  #   params.require(:article).permit(:title,:text,:category_id)
-  # end
+  def item_params
+    params.require(:item).permit(:name,:description,:category_id,:status_id,:delivery_charge_id,:shipping_area_id,:shipping_day_id,:price)
+  end
+
+  def image_params
+    params.require(:item).permit(:image).merge(user_id: current_user.id)
+  end
 
 end
