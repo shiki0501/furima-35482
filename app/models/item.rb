@@ -7,12 +7,26 @@ class Item < ApplicationRecord
   belongs_to :shipping_day
   has_one_attached :image
 
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :status_id
+    validates :delivery_charge_id
+    validates :shipping_area_id
+    validates :shipping_day_id
+  end
 
-  validates :category_id, numericality: { other_than: 1 } 
-  validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
-  
+  with_options numericality: { other_than: 1, message: "can't be blank" } do
+    validates :category_id
+    validates :status_id
+    validates :delivery_charge_id
+    validates :shipping_area_id
+    validates :shipping_day_id
+  end
+
   with_options presence: true do
+    validates :image
     validates :name
+    validates :description
     validates :category_id
     validates :status_id
     validates :delivery_charge_id
@@ -21,9 +35,7 @@ class Item < ApplicationRecord
     validates :price
   end
 
-
-  # private
-  # def item_params
-  #   params.require(:item).permit(:image).merge(user_id: current_user.id)
-  # end
+  VALID_PRICE_REGEX = /\d/
+  validates :price, format: { with: VALID_PRICE_REGEX }
+  validates_inclusion_of :price, in: 300..9_999_999
 end
