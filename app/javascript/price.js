@@ -7,7 +7,6 @@ function post (){
       PriceTax.innerHTML = Math.floor(price.value*Tax)
       const PriceProfit = document.getElementById("profit")
       PriceProfit.innerHTML = price.value-PriceTax.innerHTML
-    console.log(PriceTax)
   });
 };
 
