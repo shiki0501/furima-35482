@@ -1,11 +1,11 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:new]
   def index
-    @item = Item.order('created_at DESC')
+    # @item = Item.order('created_at DESC')
   end
 
   def new
     @item = Item.new
-    redirect_to user_session_path unless user_signed_in? == true
   end
 
   def create
@@ -18,10 +18,6 @@ class ItemsController < ApplicationController
   end
 
   private
-
-  def user_params
-    params.require(:user)
-  end
 
   def item_params
     params.require(:item).permit(:image, :name, :description, :category_id, :status_id, :delivery_charge_id, :shipping_area_id,
