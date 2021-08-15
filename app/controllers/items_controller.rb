@@ -34,7 +34,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  def destroy 
+  def destroy
     @item.destroy
     redirect_to root_path
   end
@@ -53,5 +53,4 @@ class ItemsController < ApplicationController
   def set_security
     redirect_to action: :index unless @item.user.id == current_user.id
   end
-
 end
