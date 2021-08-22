@@ -11,7 +11,8 @@ class DeliverysController < ApplicationController
       @delivery_buy.save
       return redirect_to root_path
     else
-      render 'index'
+      @item = Item.find(params[:item_id])
+      render :index 
     end
   end
 
