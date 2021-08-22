@@ -2,13 +2,13 @@ class DeliverysController < ApplicationController
 
   def index
     @item = Item.find(params[:item_id])
+    @delivery_buy = DeliveryBuy.new
   end
   
   def create
-    binding.pry
-    @delivery = Delivery.new(delivery_params)
-    if @delivery.valid?
-      @delivery.save
+    @delivery_buy = DeliveryBuy.new(deliverybuy_params)
+    if @delivery_buy.valid?
+      @delivery_buy.save
       return redirect_to root_path
     else
       render 'index'
@@ -17,9 +17,8 @@ class DeliverysController < ApplicationController
 
   private
 
-  def delivery_params
-    params.require(:delivery)
-    # params.require(:delivery).permit(:shipping_area_id).merge(token: params[:token])
+  def deliverybuy_params
+    params.require(:delivery_buy).permit(:postal_code, :shipping_area_id, :municipality, :address, :building_name, :tell) 
   end
 
 end
