@@ -12,7 +12,7 @@ RSpec.describe DeliveryBuy, type: :model do
         expect(@delivery_buy).to be_valid
       end
       it 'building_name は空でも保存できること' do
-        @delivery_buy.building_name  = ''
+        @delivery_buy.building_name = ''
         expect(@delivery_buy).to be_valid
       end
     end
@@ -31,7 +31,7 @@ RSpec.describe DeliveryBuy, type: :model do
       it 'postal_codeにでは(-)がないと保存できないこと' do
         @delivery_buy.postal_code = '8700958'
         @delivery_buy.valid?
-        expect(@delivery_buy.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@delivery_buy.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it 'shipping_area_idが空だと保存できないこと' do
         @delivery_buy.shipping_area_id = ''
@@ -56,12 +56,11 @@ RSpec.describe DeliveryBuy, type: :model do
       it 'tellは11桁以内の数値でないと保存できないこと' do
         @delivery_buy.tell = '080-8656-3453'
         @delivery_buy.valid?
-        expect(@delivery_buy.errors.full_messages).to include("Tell is invalid.Only numbers within 11 digits can be saved")
+        expect(@delivery_buy.errors.full_messages).to include('Tell is invalid.Only numbers within 11 digits can be saved')
       end
     end
   end
 end
-
 
 # delivery_buy[number] {"424242424242424242"}
 # delivery_buy[exp_month] {"4"}
