@@ -4,7 +4,12 @@ class DeliverysController < ApplicationController
   def index
     @item = Item.find(params[:item_id])
     @delivery_buy = DeliveryBuy.new
-    redirect_to root_path unless @item.buy.nil?
+    if @item.user_id == @item.user.id 
+      redirect_to root_path
+    else
+      @item.buy.nil? 
+      redirect_to root_path
+    end
   end
 
   def create
