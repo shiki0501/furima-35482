@@ -133,9 +133,13 @@
         <div class='item-img-content'>
           <%= link_to image_tag(item.image, class: "item-img"), item_path(item.id) if item.image.attached? %>
           <%# 商品が売れていればsold outを表示しましょう %>
-          <div class='sold-out'>
-            <span>Sold Out!!</span>
-          </div>
+          <% @buy.each do |buy| %>
+            <% if item.id == buy.item_id %>
+              <div class='sold-out'>
+                <span>Sold Out!!</span>
+              </div>
+            <% end %>
+          <% end %>
           <%# //商品が売れていればsold outを表示しましょう %>
 
         </div>
