@@ -26,12 +26,8 @@ class DeliverysController < ApplicationController
   private
 
   def delivery_params
-    params.require(:delivery_buy).permit(:postal_code, :shipping_area_id, :municipality, :address, :building_name, :tell,)
-    .merge(token: params[:token])
-  end
-
-  def buy_params
-    params.require(:delivery_buy).permit(:price)
+    params.require(:delivery_buy).permit(:postal_code, :shipping_area_id, :municipality, :address, :building_name, :tell)
+    .merge(token: params[:token], user_id: current_user.id, item_id: @item.id,)
   end
 
 end
