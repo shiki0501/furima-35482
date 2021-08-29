@@ -4,19 +4,15 @@ class DeliverysController < ApplicationController
   def index
     @item = Item.find(params[:item_id])
     @delivery_buy = DeliveryBuy.new
-    if @item.user_id == @item.user.id 
-      redirect_to root_path
-    else
-      @item.buy.nil? 
-      redirect_to root_path
-    end
+    redirect_to root_path unless @item.user_id == @item.user.id
+    redirect_to root_path unless @item.buy.nil?
   end
 
   def create
     @item = Item.find(params[:item_id])
     @delivery_buy = DeliveryBuy.new(delivery_params)
     if @delivery_buy.valid?
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       Payjp::Charge.create(
         amount: @item[:price],
         card: @delivery_buy.token,
