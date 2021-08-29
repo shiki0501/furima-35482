@@ -1,8 +1,10 @@
 class DeliverysController < ApplicationController
+  before_action :authenticate_user!, only: [:index]
 
   def index
     @item = Item.find(params[:item_id])
     @delivery_buy = DeliveryBuy.new
+    redirect_to root_path unless @item.buy == nil
   end
   
   def create
