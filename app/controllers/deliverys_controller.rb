@@ -11,7 +11,7 @@ class DeliverysController < ApplicationController
     @item = Item.find(params[:item_id])
     @delivery_buy = DeliveryBuy.new(delivery_params)
     if @delivery_buy.valid?
-      Payjp.api_key = 'PAYJP_SECRET_KEY '
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
         amount: @item[:price],
         card: @delivery_buy.token,
