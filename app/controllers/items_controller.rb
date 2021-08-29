@@ -22,6 +22,7 @@ class ItemsController < ApplicationController
   end
   
   def show
+    @buy = Buy.order('created_at DESC')
   end
 
   def edit
