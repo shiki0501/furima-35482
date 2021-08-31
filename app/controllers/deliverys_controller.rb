@@ -23,16 +23,15 @@ class DeliverysController < ApplicationController
       render :index
     end
   end
-  
+
   private
-  
+
   def delivery_params
     params.require(:delivery_buy).permit(:postal_code, :shipping_area_id, :municipality, :address, :building_name, :tell)
-    .merge(token: params[:token], user_id: current_user.id, item_id: @item.id)
+          .merge(token: params[:token], user_id: current_user.id, item_id: @item.id)
   end
-  
+
   def set_delivery
     @item = Item.find(params[:item_id])
   end
-
 end
