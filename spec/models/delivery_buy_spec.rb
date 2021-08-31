@@ -4,7 +4,9 @@ RSpec.describe DeliveryBuy, type: :model do
   describe '商品購入機能' do
     before do
       user = FactoryBot.create(:user)
-      @delivery_buy = FactoryBot.build(:delivery_buy)
+      item = FactoryBot.create(:item)
+      @delivery_buy = FactoryBot.build(:delivery_buy, user_id: user.id, item_id: item.id)
+      sleep 0.5
     end
 
     context '内容に問題ない場合' do
@@ -58,16 +60,26 @@ RSpec.describe DeliveryBuy, type: :model do
         @delivery_buy.valid?
         expect(@delivery_buy.errors.full_messages).to include('Tell is invalid.Only numbers within 11 digits can be saved')
       end
+      it 'tellは9桁以下の数値では保存できないこと' do
+        @delivery_buy.tell = '080-8656-34'
+        @delivery_buy.valid?
+        expect(@delivery_buy.errors.full_messages).to include('Tell is invalid.Only numbers within 11 digits can be saved')
+      end
+      it 'tellは12桁以上の数値では保存できないこと' do
+        @delivery_buy.tell = '080-8656-345353'
+        @delivery_buy.valid?
+        expect(@delivery_buy.errors.full_messages).to include('Tell is invalid.Only numbers within 11 digits can be saved')
+      end
+      it 'user_idが紐ついてないと保存できないこと' do
+        @delivery_buy.user_id = ''
+        @delivery_buy.valid?
+        expect(@delivery_buy.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが紐ついてないと保存できないこと' do
+        @delivery_buy.item_id = ''
+        @delivery_buy.valid?
+        expect(@delivery_buy.errors.full_messages).to include("Item can't be blank")
+      end
     end
   end
 end
-
-# delivery_buy[number] {"424242424242424242"}
-# delivery_buy[exp_month] {"4"}
-# delivery_buy[exp_year] {"26"}
-# delivery_buy[cvc] {"123"}
-# postal_code { '123-4567' }
-# shipping_area_id     { Faker::Number.between(from: 2, to: 3) }
-# address { "福島市" }
-# building_name { '1-1' }
-# tell { "08044238841" }

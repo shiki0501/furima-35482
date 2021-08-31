@@ -10,11 +10,13 @@ class DeliveryBuy
   end
 
   with_options presence: true do
+    validates :item_id
+    validates :user_id
     validates :token
     validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid. Include hyphen(-)' }
     validates :shipping_area_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :municipality
     validates :address
-    validates :tell, format: { with: /\A\d{11}\z/, message: 'is invalid.Only numbers within 11 digits can be saved' }
+    validates :tell, format: { with: /\A\d{10,11}\z/, message: 'is invalid.Only numbers within 11 digits can be saved' }
   end
 end
