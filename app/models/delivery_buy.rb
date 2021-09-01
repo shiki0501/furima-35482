@@ -1,6 +1,6 @@
 class DeliveryBuy
   include ActiveModel::Model
-  attr_accessor :postal_code, :shipping_area_id, :municipality, :address, :building_name, :tell, :buy_id, :user_id, :item_id,
+  attr_accessor :postal_code, :shipping_area_id, :municipality, :address, :building_name, :tell, :user_id, :item_id,
                 :token
 
   def save

@@ -41,7 +41,7 @@ RSpec.describe DeliveryBuy, type: :model do
         expect(@delivery_buy.errors.full_messages).to include("Shipping area can't be blank")
       end
       it 'shipping_area_idが1だと保存できないこと' do
-        @delivery_buy.shipping_area_id = '1'
+        @delivery_buy.shipping_area_id = 1
         @delivery_buy.valid?
         expect(@delivery_buy.errors.full_messages).to include("Shipping area can't be blank")
       end
