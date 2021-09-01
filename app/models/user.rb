@@ -13,6 +13,9 @@ class User < ApplicationRecord
     validates :birthday
   end
 
+  has_many :items
+  has_many :buys
+
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{6,}\Z/
   validates :password, format: { with: VALID_PASSWORD_REGEX }
 
