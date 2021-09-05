@@ -4,7 +4,7 @@ class DeliverysController < ApplicationController
 
   def index
     @delivery_buy = DeliveryBuy.new
-    redirect_to root_path unless @item.user_id == @item.user.id
+    redirect_to root_path if current_user.id == @item.user.id
     redirect_to root_path unless @item.buy.nil?
   end
 
